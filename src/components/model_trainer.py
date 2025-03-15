@@ -30,8 +30,8 @@ class ModeltrainingConfig:
 
 
 
-    class ModelTrainer:
-        def __init__(self):
+class ModelTrainer:
+    def __init__(self):
 
 
 
@@ -56,7 +56,7 @@ class ModeltrainingConfig:
     def evaluate_models(self,X,y,models):
         try:
             X_train,X_test,y_train,y_test = train_test_split(
-                X,y,train_size=0.2,random_state=42
+                X,y,test_size=0.2,random_state=42
             )
 
 
@@ -67,7 +67,7 @@ class ModeltrainingConfig:
                 model = list(models.values())[i]
 
 
-                model.fit(X_train,y_train)   #train model
+                model.fit(X_train,y_train)   #trains model
 
 
                 y_train_pred = model.predict(X_train)
@@ -213,7 +213,7 @@ class ModeltrainingConfig:
 
 
 
-            model_report:dict =self.evaluate_models(X=x_train,y=y_train,models=self.models)
+            model_report:dict =self.evaluate_models(X=x_train,y=y_train,models=self.model)
 
             best_model_score=max(sorted(model_report.values()))
 
@@ -225,7 +225,7 @@ class ModeltrainingConfig:
                 list(model_report.values()).index(best_model_score)
             ]
 
-            best_model = self.models[best_model_name]
+            best_model = self.model[best_model_name]
 
 
             best_model = self.finetune_best_model(
@@ -261,17 +261,8 @@ class ModeltrainingConfig:
                 obj =best_model
             )
 
-            return self.model_training_config.train_model_path
+            return self.model_trainer_config.trained_model_path
         
 
         except Exception as e:
             raise CustomException(e,sys )
-
-
-
-
-
-        
-            
-                
-    

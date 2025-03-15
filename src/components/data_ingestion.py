@@ -46,7 +46,7 @@ class DataIngestion :
             logging.info(f"Exporting data from MongoDB")
             raw_file_path = self.data_ingestion_config.artifact_folder
 
-            os.makedirs(raw_file_path_ok = True)
+            os.makedirs(raw_file_path,exist_ok=True)
 
             sensor_data = self.export_collection_as_dataframe(
                 collection_name=MONGO_COLLECTION_NAME,
